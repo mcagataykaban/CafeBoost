@@ -41,9 +41,10 @@
             this.lvwMasalar.HideSelection = false;
             this.lvwMasalar.Location = new System.Drawing.Point(0, 24);
             this.lvwMasalar.Name = "lvwMasalar";
-            this.lvwMasalar.Size = new System.Drawing.Size(800, 468);
+            this.lvwMasalar.Size = new System.Drawing.Size(667, 415);
             this.lvwMasalar.TabIndex = 0;
             this.lvwMasalar.UseCompatibleStateImageBehavior = false;
+            this.lvwMasalar.DoubleClick += new System.EventHandler(this.lvwMasalar_DoubleClick);
             // 
             // tsmiUrunlerr
             // 
@@ -52,7 +53,7 @@
             this.tsmiGecmisSiparisler});
             this.tsmiUrunlerr.Location = new System.Drawing.Point(0, 0);
             this.tsmiUrunlerr.Name = "tsmiUrunlerr";
-            this.tsmiUrunlerr.Size = new System.Drawing.Size(800, 24);
+            this.tsmiUrunlerr.Size = new System.Drawing.Size(667, 24);
             this.tsmiUrunlerr.TabIndex = 1;
             this.tsmiUrunlerr.Text = "menuStrip1";
             // 
@@ -74,7 +75,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 492);
+            this.ClientSize = new System.Drawing.Size(667, 439);
             this.Controls.Add(this.lvwMasalar);
             this.Controls.Add(this.tsmiUrunlerr);
             this.MainMenuStrip = this.tsmiUrunlerr;
