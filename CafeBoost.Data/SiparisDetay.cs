@@ -13,9 +13,7 @@ namespace CafeBoost.Data
         public int Adet { get; set; }
         public string TutarTL => $"{Tutar():0.00}TL";
 
-        public decimal Tutar()
-        {
-            return Adet * BirimFiyat;
-        }     
+        public decimal Tutar() => Adet * BirimFiyat; 
+        
     }
 }
