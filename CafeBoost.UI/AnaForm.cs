@@ -60,12 +60,12 @@ namespace CafeBoost.UI
 
         private void tsmiUrunler_Click(object sender, EventArgs e)
         {
-            new UrunlerForm().ShowDialog();
+            new UrunlerForm(db).ShowDialog();
         }
 
         private void tsmiGecmisSiparisler_Click(object sender, EventArgs e)
         {
-            new GecmisSiparislerForm().ShowDialog();
+            new GecmisSiparislerForm(db).ShowDialog();
         }
 
         private void lvwMasalar_DoubleClick(object sender, EventArgs e)
