@@ -24,27 +24,23 @@ namespace CafeBoost.UI
             //OrnekUrunleriYukle();
             MasalariOlustur();
         }
-
-        
-
-        private void OrnekUrunleriYukle()
-        {
-            db.Urunler.Add(new Urun
-            {
-                UrunAd = "Kola",
-                BirimFiyat = 6m
-            });
-            db.Urunler.Add(new Urun
-            {
-                UrunAd = "Ayran",
-                BirimFiyat = 4m
-            }); db.Urunler.Add(new Urun
-            {
-                UrunAd = "Çay",
-                BirimFiyat = 4m
-            });
-        }
-
+        //private void OrnekUrunleriYukle()
+        //{
+        //    db.Urunler.Add(new Urun
+        //    {
+        //        UrunAd = "Kola",
+        //        BirimFiyat = 6m
+        //    });
+        //    db.Urunler.Add(new Urun
+        //    {
+        //        UrunAd = "Ayran",
+        //        BirimFiyat = 4m
+        //    }); db.Urunler.Add(new Urun
+        //    {
+        //        UrunAd = "Çay",
+        //        BirimFiyat = 4m
+        //    });
+        //}
         private void MasalariOlustur()
         {
             ImageList il = new ImageList();
@@ -83,12 +79,18 @@ namespace CafeBoost.UI
                 db.AktifSiparisler.Add(siparis);
                 lvwMasalar.SelectedItems[0].ImageKey = "dolu";
             }
-            SiparisForm frmSiparis = new SiparisForm(db, siparis, this);
+            SiparisForm frmSiparis = new SiparisForm(db, siparis);
+            frmSiparis.MasaTasindi += FrmSiparis_MasaTasindi;
             DialogResult dr = frmSiparis.ShowDialog();
             if (dr == DialogResult.OK)
             {
                 lvwMasalar.SelectedItems[0].ImageKey = "bos";
             }
+        }
+
+        private void FrmSiparis_MasaTasindi(object sender, MasaTasimaEventArgs e)
+        {
+            MasaTasi(e.EskiMasaNo, e.YeniMasaNo);
         }
 
         private Siparis AktifSiparisBul(int masaNo)
@@ -103,7 +105,7 @@ namespace CafeBoost.UI
             //return null;
             return db.AktifSiparisler.FirstOrDefault(x => x.MasaNo == masaNo);
         }
-        public void MasaTasi(int kaynak, int hedef)
+        private void MasaTasi(int kaynak, int hedef)
         {
             foreach (ListViewItem item in lvwMasalar.Items)
             {
