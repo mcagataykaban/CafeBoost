@@ -34,6 +34,10 @@ namespace CafeBoost.UI
             {
                 UrunAd = "Ayran",
                 BirimFiyat = 4m
+            }); db.Urunler.Add(new Urun
+            {
+                UrunAd = "Çay",
+                BirimFiyat = 4m
             });
         }
 
@@ -75,7 +79,12 @@ namespace CafeBoost.UI
                 db.AktifSiparisler.Add(siparis);
                 lvwMasalar.SelectedItems[0].ImageKey = "dolu";
             }
-            new SiparisForm(db,siparis).ShowDialog();
+            SiparisForm frmSiparis = new SiparisForm(db, siparis);
+            DialogResult dr = frmSiparis.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                lvwMasalar.SelectedItems[0].ImageKey = "bos";
+            }
         }
 
         private Siparis AktifSiparisBul(int masaNo)

@@ -14,6 +14,7 @@ namespace CafeBoost.Data
         public DateTime? AcilisZamani { get; set; }
         public DateTime? KapanisZamani { get; set; }
         public SiparisDurum Durum { get; set; }
+        public decimal OdenenTutar { get; set; }
         public string ToplamTutarTL => $"{ToplamTutar():0.00}TL";
         public decimal ToplamTutar()
         {

@@ -21,6 +21,7 @@ namespace CafeBoost.UI
             db = kafeVeri;
             this.siparis = siparis;
             InitializeComponent();
+            dgvSiparisDetaylar.AutoGenerateColumns = false;
             UrunleriListele();
             MasaNoGuncelle();
             blSiparisDetaylar = new BindingList<SiparisDetay>(siparis.SiparisDetaylar);
@@ -71,6 +72,36 @@ namespace CafeBoost.UI
             {
                 e.Cancel = true;
             }
+        }
+
+        private void btnAnasayfa_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnSiparisIptal_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Sipariş iptal edilerek kapatılacaktır. Emin misiniz ? ", "İptal Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (dr == DialogResult.Yes)
+                SiparisKapat(SiparisDurum.Iptal);
+        }
+
+        private void btnOdemeAl_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Ödeme alındıysa sipariş kapatılacaktır. Emin misiniz ?", "Ödeme Onayı",MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (dr == DialogResult.Yes)
+                SiparisKapat(SiparisDurum.Odendi,siparis.ToplamTutar());
+        }
+
+        private void SiparisKapat(SiparisDurum siparisDurum, decimal odenenTutar = 0)
+        {
+            siparis.OdenenTutar = odenenTutar;
+            siparis.KapanisZamani = DateTime.Now;
+            siparis.Durum = siparisDurum;
+            db.AktifSiparisler.Remove(siparis);
+            db.GecmisSiparisler.Add(siparis);
+            DialogResult = DialogResult.OK;
+            Close();
         }
     }
 }
