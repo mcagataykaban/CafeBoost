@@ -23,6 +23,7 @@ namespace CafeBoost.UI
             this.siparis = siparis;
             this.anaForm = anaForm;
             InitializeComponent();
+            OdemeTutariGuncelle();
             dgvSiparisDetaylar.AutoGenerateColumns = false;
             MasalariListele();
             UrunleriListele();

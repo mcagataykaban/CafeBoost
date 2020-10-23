@@ -174,9 +174,8 @@
             this.lblOdemeTutari.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOdemeTutari.Location = new System.Drawing.Point(599, 300);
             this.lblOdemeTutari.Name = "lblOdemeTutari";
-            this.lblOdemeTutari.Size = new System.Drawing.Size(69, 20);
+            this.lblOdemeTutari.Size = new System.Drawing.Size(0, 20);
             this.lblOdemeTutari.TabIndex = 10;
-            this.lblOdemeTutari.Text = "₺ 00.00";
             // 
             // btnSiparisIptal
             // 
