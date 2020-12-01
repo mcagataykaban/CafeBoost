@@ -86,10 +86,12 @@ namespace CafeBoost.UI
                 if ((int)item.Tag == kaynak)
                 {
                     item.ImageKey = "bos";
+                    item.Selected = false;
                 }
                 if ((int)item.Tag == hedef)
                 {
                     item.ImageKey = "dolu";
+                    item.Selected = true;
                 }
             }
         }
