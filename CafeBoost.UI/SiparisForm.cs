@@ -57,7 +57,7 @@ namespace CafeBoost.UI
 
         private void UrunleriListele()
         {
-            cboUrun.DataSource = db.Urunler;
+            cboUrun.DataSource = db.Urunler.ToList();
         }
 
         private void MasaNoGuncelle()
@@ -73,11 +73,21 @@ namespace CafeBoost.UI
             int adet = (int)nudAdet.Value;
             SiparisDetay detay = new SiparisDetay()
             {
+                UrunId = secilenUrun.Id,
                 UrunAd = secilenUrun.UrunAd,
                 BirimFiyat = secilenUrun.BirimFiyat,
                 Adet = adet
             };
-            blSiparisDetaylar.Add(detay);
+            siparis.SiparisDetaylar.Add(detay);
+            db.SaveChanges();
+            SiparisDetaylariYenile();
+
+        }
+
+        private void SiparisDetaylariYenile()
+        {
+            blSiparisDetaylar.Clear();
+            siparis.SiparisDetaylar.ToList().ForEach(x => blSiparisDetaylar.Add(x));
         }
 
         private void dgvSiparisDetaylar_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
@@ -87,6 +97,9 @@ namespace CafeBoost.UI
             {
                 e.Cancel = true;
             }
+            var sd = (SiparisDetay)e.Row.DataBoundItem;
+            siparis.SiparisDetaylar.Remove(sd);
+            db.SaveChanges();
         }
 
         private void btnAnasayfa_Click(object sender, EventArgs e)
@@ -124,6 +137,7 @@ namespace CafeBoost.UI
             int kaynak = siparis.MasaNo;
             int hedef = (int)cboMasalar.SelectedItem;
             siparis.MasaNo = hedef;
+            db.SaveChanges();
             MasaNoGuncelle();
             MasalariListele();
             MasaTasimaEventArgs args = new MasaTasimaEventArgs()

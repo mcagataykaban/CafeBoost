@@ -56,6 +56,10 @@
     <Compile Include="Migrations\202012011011578_Ilk.designer.cs">
       <DependentUpon>202012011011578_Ilk.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012011315362_SiparisDetayUrunCascadeOff.cs" />
+    <Compile Include="Migrations\202012011315362_SiparisDetayUrunCascadeOff.designer.cs">
+      <DependentUpon>202012011315362_SiparisDetayUrunCascadeOff.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Siparis.cs" />
@@ -71,6 +75,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202012011011578_Ilk.resx">
       <DependentUpon>202012011011578_Ilk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012011315362_SiparisDetayUrunCascadeOff.resx">
+      <DependentUpon>202012011315362_SiparisDetayUrunCascadeOff.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

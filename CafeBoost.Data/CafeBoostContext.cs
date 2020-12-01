@@ -14,6 +14,14 @@ namespace CafeBoost.Data
         {
 
         }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<SiparisDetay>()
+                .HasRequired(x => x.Urun)
+                .WithMany(x => x.SiparisDetaylar)
+                .WillCascadeOnDelete(false);
+        }
         public DbSet<Urun> Urunler { get; set; }
         public DbSet<Siparis> Siparisler { get; set; }
         public DbSet<SiparisDetay> SiparisDetaylar { get; set; }

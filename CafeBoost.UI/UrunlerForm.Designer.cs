@@ -34,9 +34,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvUrunler = new System.Windows.Forms.DataGridView();
-            this.txtUrunAd = new System.Windows.Forms.TextBox();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtUrunAd = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudBirimFiyat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUrunler)).BeginInit();
@@ -56,6 +56,7 @@
             // 
             // nudBirimFiyat
             // 
+            this.nudBirimFiyat.DecimalPlaces = 2;
             this.nudBirimFiyat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nudBirimFiyat.Location = new System.Drawing.Point(232, 37);
             this.nudBirimFiyat.Name = "nudBirimFiyat";
@@ -99,15 +100,9 @@
             this.dgvUrunler.Name = "dgvUrunler";
             this.dgvUrunler.Size = new System.Drawing.Size(469, 441);
             this.dgvUrunler.TabIndex = 11;
+            this.dgvUrunler.CellValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUrunler_CellValidated);
             this.dgvUrunler.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.dgvUrunler_CellValidating);
-            // 
-            // txtUrunAd
-            // 
-            this.txtUrunAd.Location = new System.Drawing.Point(12, 39);
-            this.txtUrunAd.Name = "txtUrunAd";
-            this.txtUrunAd.Size = new System.Drawing.Size(183, 20);
-            this.txtUrunAd.TabIndex = 12;
-            this.txtUrunAd.Validating += new System.ComponentModel.CancelEventHandler(this.txtUrunAd_Validating);
+            this.dgvUrunler.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvUrunler_UserDeletingRow);
             // 
             // Column1
             // 
@@ -122,6 +117,14 @@
             this.Column2.HeaderText = "Birim Fiyatı";
             this.Column2.Name = "Column2";
             this.Column2.Width = 81;
+            // 
+            // txtUrunAd
+            // 
+            this.txtUrunAd.Location = new System.Drawing.Point(12, 39);
+            this.txtUrunAd.Name = "txtUrunAd";
+            this.txtUrunAd.Size = new System.Drawing.Size(183, 20);
+            this.txtUrunAd.TabIndex = 12;
+            this.txtUrunAd.Validating += new System.ComponentModel.CancelEventHandler(this.txtUrunAd_Validating);
             // 
             // errorProvider1
             // 
