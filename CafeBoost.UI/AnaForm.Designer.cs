@@ -17,6 +17,10 @@
             {
                 components.Dispose();
             }
+            if (disposing)
+            {
+                db.Dispose();
+            }
             base.Dispose(disposing);
         }
 
@@ -81,7 +85,6 @@
             this.MainMenuStrip = this.tsmiUrunlerr;
             this.Name = "AnaForm";
             this.Text = "Cafe Boost";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AnaForm_FormClosing);
             this.tsmiUrunlerr.ResumeLayout(false);
             this.tsmiUrunlerr.PerformLayout();
             this.ResumeLayout(false);

@@ -16,31 +16,13 @@ namespace CafeBoost.UI
 {
     public partial class AnaForm : Form
     {
-        KafeVeri db = new KafeVeri();
+        CafeBoostContext db = new CafeBoostContext();
         public AnaForm()
         {
-            VeriOku();
             InitializeComponent();
-            //OrnekUrunleriYukle();
             MasalariOlustur();
         }
-        //private void OrnekUrunleriYukle()
-        //{
-        //    db.Urunler.Add(new Urun
-        //    {
-        //        UrunAd = "Kola",
-        //        BirimFiyat = 6m
-        //    });
-        //    db.Urunler.Add(new Urun
-        //    {
-        //        UrunAd = "Ayran",
-        //        BirimFiyat = 4m
-        //    }); db.Urunler.Add(new Urun
-        //    {
-        //        UrunAd = "Çay",
-        //        BirimFiyat = 4m
-        //    });
-        //}
+
         private void MasalariOlustur()
         {
             ImageList il = new ImageList();
@@ -52,7 +34,7 @@ namespace CafeBoost.UI
             for (int i = 1; i <= db.MasaAdet; i++)
             {
                 lvi = new ListViewItem("Masa" + i);
-                lvi.ImageKey = db.AktifSiparisler.Any(x => x.MasaNo == i) ? "dolu" : "bos"; 
+                lvi.ImageKey = db.Siparisler.Any(x => x.MasaNo == i && x.Durum == SiparisDurum.Aktif) ? "dolu" : "bos";
                 lvi.Tag = i;
                 lvwMasalar.Items.Add(lvi);
             }
@@ -76,7 +58,7 @@ namespace CafeBoost.UI
             {
                 siparis = new Siparis();
                 siparis.MasaNo = masaNo;
-                db.AktifSiparisler.Add(siparis);
+                db.Siparisler.Add(siparis);
                 lvwMasalar.SelectedItems[0].ImageKey = "dolu";
             }
             SiparisForm frmSiparis = new SiparisForm(db, siparis);
@@ -95,15 +77,7 @@ namespace CafeBoost.UI
 
         private Siparis AktifSiparisBul(int masaNo)
         {
-            //foreach (var item in db.AktifSiparisler)
-            //{
-            //    if (item.MasaNo == )
-            //    {
-            //        return item;
-            //    }
-            //}
-            //return null;
-            return db.AktifSiparisler.FirstOrDefault(x => x.MasaNo == masaNo);
+            return db.Siparisler.FirstOrDefault(x => x.MasaNo == masaNo && x.Durum == SiparisDurum.Aktif);
         }
         private void MasaTasi(int kaynak, int hedef)
         {
@@ -120,29 +94,7 @@ namespace CafeBoost.UI
             }
         }
 
-        private void AnaForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            VeriKaydet();
-        }
 
-        private void VeriOku()
-        {
-            try
-            {
-                string json = File.ReadAllText("veri.json");
-                db = JsonConvert.DeserializeObject<KafeVeri>(json);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        private void VeriKaydet()
-        {
-            string json = JsonConvert.SerializeObject(db, Formatting.Indented);
-            File.WriteAllText("veri.json",json);
-        }
+     
     }
 }

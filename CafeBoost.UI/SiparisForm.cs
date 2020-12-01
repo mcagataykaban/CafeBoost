@@ -14,12 +14,12 @@ namespace CafeBoost.UI
     public partial class SiparisForm : Form
     {
         public event EventHandler<MasaTasimaEventArgs> MasaTasindi;
-        readonly KafeVeri db;
-        readonly Siparis siparis;
-        readonly BindingList<SiparisDetay> blSiparisDetaylar;
-        public SiparisForm(KafeVeri kafeVeri, Siparis siparis)
+        private readonly CafeBoostContext db;
+        private readonly Siparis siparis;
+        private readonly BindingList<SiparisDetay> blSiparisDetaylar;
+        public SiparisForm(CafeBoostContext cafeBoostContext, Siparis siparis)
         {
-            db = kafeVeri;
+            db = cafeBoostContext;
             this.siparis = siparis;
             InitializeComponent();
             OdemeTutariGuncelle();
@@ -27,7 +27,7 @@ namespace CafeBoost.UI
             MasalariListele();
             UrunleriListele();
             MasaNoGuncelle();
-            blSiparisDetaylar = new BindingList<SiparisDetay>(siparis.SiparisDetaylar);
+            blSiparisDetaylar = new BindingList<SiparisDetay>(siparis.SiparisDetaylar.ToList());
             blSiparisDetaylar.ListChanged += BlSiparisDetaylar_ListChanged;
             dgvSiparisDetaylar.DataSource = blSiparisDetaylar;
 
@@ -38,7 +38,7 @@ namespace CafeBoost.UI
             cboMasalar.Items.Clear();
                 for (int i = 1; i <= db.MasaAdet; i++)
                 {
-                    if (!db.AktifSiparisler.Any(x=> x.MasaNo == i))
+                    if (!db.Siparisler.Any(x=> x.MasaNo == i && x.Durum == SiparisDurum.Aktif))
                     {
                         cboMasalar.Items.Add(i);
                     }
@@ -113,8 +113,7 @@ namespace CafeBoost.UI
             siparis.OdenenTutar = odenenTutar;
             siparis.KapanisZamani = DateTime.Now;
             siparis.Durum = siparisDurum;
-            db.AktifSiparisler.Remove(siparis);
-            db.GecmisSiparisler.Add(siparis);
+            db.SaveChanges();
             DialogResult = DialogResult.OK;
             Close();
         }
